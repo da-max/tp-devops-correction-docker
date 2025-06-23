@@ -10,3 +10,11 @@
       env:
           DATABASE_HOST: "{{ DATABASE_HOST }}"
           DATABASE_PASSWORD: "{{ DATABASE_PASSWORD }}"
+
+- name: Run FRONTEND
+  community.docker.docker_container:
+    name: simple-frontend
+    image: "damaaax/tp-devops-simple-frontend:{{ version }}"
+    networks:
+        - name: "{{ network }}"
+

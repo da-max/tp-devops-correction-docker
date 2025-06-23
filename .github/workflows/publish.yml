@@ -30,6 +30,15 @@ jobs:
           tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-api:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
+      - name: Build image and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: simple-frontend
+          # Note: tags has to be all lower-case
+          tags:  ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-simple-frontend:latest
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Build image and push database
         uses: docker/build-push-action@v6
         with:
