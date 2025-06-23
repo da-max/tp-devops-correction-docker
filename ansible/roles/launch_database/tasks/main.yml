@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/launch_database
+- name: Create volume for data
+  community.docker.docker_volume:
+      name: db-volume
+
+- name: Run Database
+  community.docker.docker_container:
+      name: database
+      image: "damaaax/tp-devops-database:{{ version }}"
+      env:
+          POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"
+      volumes:
+          - db-volume:/var/lib/postgresql/data
+      networks:
+          - name: "{{ network }}"
+

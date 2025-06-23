@@ -1,0 +1,12 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/launch_app
+- name: Run API
+  community.docker.docker_container:
+      name: simple-api
+      image: "damaaax/tp-devops-simple-api:{{ version }}"
+      networks:
+          - name: "{{ network }}"
+      env:
+          DATABASE_HOST: "{{ DATABASE_HOST }}"
+          DATABASE_PASSWORD: "{{ DATABASE_PASSWORD }}"

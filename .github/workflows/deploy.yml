@@ -1,0 +1,25 @@
+name: Deploy the application on serveur
+on:
+    workflow_run:
+      types:
+        - completed
+      workflows:
+        - publish
+      branches:
+        - main
+  
+jobs:
+    deploy-image:
+        runs-on: ubuntu-24.04
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Run playbook
+              uses: dawidd6/action-ansible-playbook@v4
+              with:
+                  playbook: playbook.yml
+                  directory: ./ansible
+                  key: ${{secrets.SSH_PRIVATE_KEY}}
+                  options: |
+                        -i inventories/setup.yml
