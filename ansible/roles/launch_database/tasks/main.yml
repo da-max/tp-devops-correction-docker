@@ -15,4 +15,5 @@
           - db-volume:/var/lib/postgresql/data
       networks:
           - name: "{{ network }}"
-
+      pull: "always"
+      restart: true

@@ -10,6 +10,7 @@
       env:
           DATABASE_HOST: "{{ DATABASE_HOST }}"
           DATABASE_PASSWORD: "{{ DATABASE_PASSWORD }}"
+      pull: "always"
 
 - name: Run FRONTEND
   community.docker.docker_container:
@@ -17,4 +18,5 @@
     image: "damaaax/tp-devops-simple-frontend:{{ version }}"
     networks:
         - name: "{{ network }}"
-
+    pull: "always"
+    restart: true

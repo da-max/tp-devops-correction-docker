@@ -9,3 +9,5 @@
           - "0.0.0.0:80:80"
       networks:
           - name: "{{ network }}"
+      pull: "always"
+      restart: true
